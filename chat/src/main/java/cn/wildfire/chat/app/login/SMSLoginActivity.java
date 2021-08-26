@@ -36,8 +36,8 @@ public class SMSLoginActivity extends WfcBaseNoToolbarActivity {
     EditText phoneNumberEditText;
     @BindView(R.id.authCodeEditText)
     EditText authCodeEditText;
-    @BindView(R.id.requestAuthCodeButton)
-    TextView requestAuthCodeButton;
+//    @BindView(R.id.requestAuthCodeButton)
+//    TextView requestAuthCodeButton;
 
     private String phoneNumber;
 
@@ -56,12 +56,20 @@ public class SMSLoginActivity extends WfcBaseNoToolbarActivity {
     @OnTextChanged(value = R.id.phoneNumberEditText, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void inputPhoneNumber(Editable editable) {
         String phone = editable.toString().trim();
-        if (phone.length() == 11) {
-            requestAuthCodeButton.setEnabled(true);
-        } else {
-            requestAuthCodeButton.setEnabled(false);
+
+        if(phone.length() <= 3){
             loginButton.setEnabled(false);
         }
+
+
+
+
+//        if (phone.length() == 11) {
+//            requestAuthCodeButton.setEnabled(true);
+//        } else {
+//            requestAuthCodeButton.setEnabled(false);
+//            loginButton.setEnabled(false);
+//        }
     }
 
     @OnTextChanged(value = R.id.authCodeEditText, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
@@ -118,33 +126,33 @@ public class SMSLoginActivity extends WfcBaseNoToolbarActivity {
         });
     }
 
-    private Handler handler = new Handler();
-
-    @OnClick(R.id.requestAuthCodeButton)
-    void requestAuthCode() {
-        requestAuthCodeButton.setEnabled(false);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (!isFinishing()) {
-                    requestAuthCodeButton.setEnabled(true);
-                }
-            }
-        }, 60 * 1000);
-
-        Toast.makeText(this, "请求验证码...", Toast.LENGTH_SHORT).show();
-        String phoneNumber = phoneNumberEditText.getText().toString().trim();
-
-        AppService.Instance().requestAuthCode(phoneNumber, new AppService.SendCodeCallback() {
-            @Override
-            public void onUiSuccess() {
-                Toast.makeText(SMSLoginActivity.this, "发送验证码成功", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onUiFailure(int code, String msg) {
-                Toast.makeText(SMSLoginActivity.this, "发送验证码失败: " + code + " " + msg, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private Handler handler = new Handler();
+//
+//    @OnClick(R.id.requestAuthCodeButton)
+//    void requestAuthCode() {
+//        requestAuthCodeButton.setEnabled(false);
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (!isFinishing()) {
+//                    requestAuthCodeButton.setEnabled(true);
+//                }
+//            }
+//        }, 60 * 1000);
+//
+//        Toast.makeText(this, "请求验证码...", Toast.LENGTH_SHORT).show();
+//        String phoneNumber = phoneNumberEditText.getText().toString().trim();
+//
+//        AppService.Instance().requestAuthCode(phoneNumber, new AppService.SendCodeCallback() {
+//            @Override
+//            public void onUiSuccess() {
+//                Toast.makeText(SMSLoginActivity.this, "发送验证码成功", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onUiFailure(int code, String msg) {
+//                Toast.makeText(SMSLoginActivity.this, "发送验证码失败: " + code + " " + msg, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 }

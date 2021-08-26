@@ -24,7 +24,7 @@ public class MyApp extends BaseApp {
 
 
     // 一定记得替换为你们自己的，ID请从BUGLY官网申请。关于BUGLY，可以从BUGLY官网了解，或者百度。
-    public static String BUGLY_ID = "34490ba79f";
+    public static String BUGLY_ID = "34490ba79f111";
 
     @Override
     public void onCreate() {

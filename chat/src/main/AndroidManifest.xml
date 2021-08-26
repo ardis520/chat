@@ -85,7 +85,7 @@
 
         <activity
             android:name="cn.wildfire.chat.app.main.MainActivity"
-            android:label="野火IM"
+            android:label="NFCA IM"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="${applicationId}.main" />
